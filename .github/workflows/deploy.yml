@@ -87,46 +87,46 @@ jobs:
         
         echo "Updated docker-compose.yml with new image tags"
 
-    - name: Commit and push updated docker-compose
-      if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add docker-compose.yml
-        git commit -m "Update docker-compose.yml with version ${{ steps.version.outputs.version }}" || echo "No changes to commit"
-        git push
+    # - name: Commit and push updated docker-compose
+    #   if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+    #   run: |
+    #     git config --local user.email "action@github.com"
+    #     git config --local user.name "GitHub Action"
+    #     git add docker-compose.yml
+    #     git commit -m "Update docker-compose.yml with version ${{ steps.version.outputs.version }}" || echo "No changes to commit"
+    #     git push
 
-    - name: Create Release
-      if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: v${{ steps.version.outputs.version }}
-        release_name: Release v${{ steps.version.outputs.version }}
-        body: |
-          ## Docker Images Released
+    # - name: Create Release
+    #   if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+    #   uses: actions/create-release@v1
+    #   env:
+    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #   with:
+    #     tag_name: v${{ steps.version.outputs.version }}
+    #     release_name: Release v${{ steps.version.outputs.version }}
+    #     body: |
+    #       ## Docker Images Released
           
-          **Version:** ${{ steps.version.outputs.version }}
+    #       **Version:** ${{ steps.version.outputs.version }}
           
-                     ### Images:
-           - **API Gateway:** `${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_USERNAME }}/prod-v1-deployement:api-gateway-${{ steps.version.outputs.version }}`
-           - **Eureka Server:** `${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_USERNAME }}/prod-v1-deployement:eureka-server-${{ steps.version.outputs.version }}`
-           - **User Service:** `${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_USERNAME }}/prod-v1-deployement:user-service-${{ steps.version.outputs.version }}`
+    #                  ### Images:
+    #        - **API Gateway:** `${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_USERNAME }}/prod-v1-deployement:api-gateway-${{ steps.version.outputs.version }}`
+    #        - **Eureka Server:** `${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_USERNAME }}/prod-v1-deployement:eureka-server-${{ steps.version.outputs.version }}`
+    #        - **User Service:** `${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_USERNAME }}/prod-v1-deployement:user-service-${{ steps.version.outputs.version }}`
           
-          ### Usage:
-          ```bash
-          docker-compose pull
-          docker-compose up -d
-          ```
-        draft: false
-        prerelease: false
+    #       ### Usage:
+    #       ```bash
+    #       docker-compose pull
+    #       docker-compose up -d
+    #       ```
+    #     draft: false
+    #     prerelease: false
 
-    - name: Output version info
-      run: |
-        echo "🚀 Deployment completed successfully!"
-        echo "📦 Version: ${{ steps.version.outputs.version }}"
-        echo "🐳 Images pushed to Docker Hub:"
-        echo "   - ${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_USERNAME }}/prod-v1-deployement:api-gateway-${{ steps.version.outputs.version }}"
-        echo "   - ${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_USERNAME }}/prod-v1-deployement:eureka-server-${{ steps.version.outputs.version }}"
-        echo "   - ${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_USERNAME }}/prod-v1-deployement:user-service-${{ steps.version.outputs.version }}"
+    # - name: Output version info
+    #   run: |
+    #     echo "🚀 Deployment completed successfully!"
+    #     echo "📦 Version: ${{ steps.version.outputs.version }}"
+    #     echo "🐳 Images pushed to Docker Hub:"
+    #     echo "   - ${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_USERNAME }}/prod-v1-deployement:api-gateway-${{ steps.version.outputs.version }}"
+    #     echo "   - ${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_USERNAME }}/prod-v1-deployement:eureka-server-${{ steps.version.outputs.version }}"
+    #     echo "   - ${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_USERNAME }}/prod-v1-deployement:user-service-${{ steps.version.outputs.version }}"
