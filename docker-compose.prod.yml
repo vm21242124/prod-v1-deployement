@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   api-gateway:
-    image: ${DOCKERHUB_USERNAME}/api-gateway:latest
+    image: ${DOCKERHUB_USERNAME}/prod-v1-deployement:api-gateway-latest
     ports:
       - "8080:8080"
     environment:
@@ -27,7 +27,7 @@ services:
 
   # Eureka Server
   eureka-server:
-    image: ${DOCKERHUB_USERNAME}/eureka-server:latest
+    image: ${DOCKERHUB_USERNAME}/prod-v1-deployement:eureka-server-latest
     ports:
       - "8761:8761"
     networks:
@@ -36,7 +36,7 @@ services:
 
   # User Service
   user-service:
-    image: ${DOCKERHUB_USERNAME}/user-service:latest
+    image: ${DOCKERHUB_USERNAME}/prod-v1-deployement:user-service-latest
     ports:
       - "8081:8081"
     environment:

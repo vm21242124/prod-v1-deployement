@@ -9,9 +9,9 @@ on:
 
 env:
   REGISTRY: docker.io
-  IMAGE_NAME_API_GATEWAY: ${{ github.repository }}/api-gateway
-  IMAGE_NAME_EUREKA: ${{ github.repository }}/eureka-server
-  IMAGE_NAME_USER_SERVICE: ${{ github.repository }}/user-service
+  IMAGE_NAME_API_GATEWAY: ${{ secrets.DOCKERHUB_USERNAME }}/prod-v1-deployement:api-gateway
+  IMAGE_NAME_EUREKA: ${{ secrets.DOCKERHUB_USERNAME }}/prod-v1-deployement:eureka-server
+  IMAGE_NAME_USER_SERVICE: ${{ secrets.DOCKERHUB_USERNAME }}/prod-v1-deployement:user-service
 
 jobs:
   build-and-push:
@@ -48,8 +48,8 @@ jobs:
         context: ./apigateway
         push: true
         tags: |
-          ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_API_GATEWAY }}:${{ steps.version.outputs.version }}
-          ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_API_GATEWAY }}:latest
+          ${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_USERNAME }}/prod-v1-deployement:api-gateway-${{ steps.version.outputs.version }}
+          ${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_USERNAME }}/prod-v1-deployement:api-gateway-latest
         cache-from: type=gha
         cache-to: type=gha,mode=max
 
@@ -59,8 +59,8 @@ jobs:
         context: ./eureka
         push: true
         tags: |
-          ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_EUREKA }}:${{ steps.version.outputs.version }}
-          ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_EUREKA }}:latest
+          ${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_USERNAME }}/prod-v1-deployement:eureka-server-${{ steps.version.outputs.version }}
+          ${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_USERNAME }}/prod-v1-deployement:eureka-server-latest
         cache-from: type=gha
         cache-to: type=gha,mode=max
 
@@ -70,8 +70,8 @@ jobs:
         context: ./userService
         push: true
         tags: |
-          ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_USER_SERVICE }}:${{ steps.version.outputs.version }}
-          ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_USER_SERVICE }}:latest
+          ${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_USERNAME }}/prod-v1-deployement:user-service-${{ steps.version.outputs.version }}
+          ${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_USERNAME }}/prod-v1-deployement:user-service-latest
         cache-from: type=gha
         cache-to: type=gha,mode=max
 
@@ -81,9 +81,9 @@ jobs:
         cp docker-compose.yml docker-compose.yml.backup
         
         # Update docker-compose.yml with new image tags
-        sed -i "s|build: .|image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_API_GATEWAY }}:${{ steps.version.outputs.version }}|g" docker-compose.yml
-        sed -i "s|build: ../eureka|image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_EUREKA }}:${{ steps.version.outputs.version }}|g" docker-compose.yml
-        sed -i "s|build: ../userService|image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_USER_SERVICE }}:${{ steps.version.outputs.version }}|g" docker-compose.yml
+        sed -i "s|build: .|image: ${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_USERNAME }}/prod-v1-deployement:api-gateway-${{ steps.version.outputs.version }}|g" docker-compose.yml
+        sed -i "s|build: ../eureka|image: ${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_USERNAME }}/prod-v1-deployement:eureka-server-${{ steps.version.outputs.version }}|g" docker-compose.yml
+        sed -i "s|build: ../userService|image: ${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_USERNAME }}/prod-v1-deployement:user-service-${{ steps.version.outputs.version }}|g" docker-compose.yml
         
         echo "Updated docker-compose.yml with new image tags"
 
@@ -109,10 +109,10 @@ jobs:
           
           **Version:** ${{ steps.version.outputs.version }}
           
-          ### Images:
-          - **API Gateway:** `${{ env.REGISTRY }}/${{ env.IMAGE_NAME_API_GATEWAY }}:${{ steps.version.outputs.version }}`
-          - **Eureka Server:** `${{ env.REGISTRY }}/${{ env.IMAGE_NAME_EUREKA }}:${{ steps.version.outputs.version }}`
-          - **User Service:** `${{ env.REGISTRY }}/${{ env.IMAGE_NAME_USER_SERVICE }}:${{ steps.version.outputs.version }}`
+                     ### Images:
+           - **API Gateway:** `${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_USERNAME }}/prod-v1-deployement:api-gateway-${{ steps.version.outputs.version }}`
+           - **Eureka Server:** `${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_USERNAME }}/prod-v1-deployement:eureka-server-${{ steps.version.outputs.version }}`
+           - **User Service:** `${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_USERNAME }}/prod-v1-deployement:user-service-${{ steps.version.outputs.version }}`
           
           ### Usage:
           ```bash
@@ -127,6 +127,6 @@ jobs:
         echo "🚀 Deployment completed successfully!"
         echo "📦 Version: ${{ steps.version.outputs.version }}"
         echo "🐳 Images pushed to Docker Hub:"
-        echo "   - ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_API_GATEWAY }}:${{ steps.version.outputs.version }}"
-        echo "   - ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_EUREKA }}:${{ steps.version.outputs.version }}"
-        echo "   - ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_USER_SERVICE }}:${{ steps.version.outputs.version }}"
+        echo "   - ${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_USERNAME }}/prod-v1-deployement:api-gateway-${{ steps.version.outputs.version }}"
+        echo "   - ${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_USERNAME }}/prod-v1-deployement:eureka-server-${{ steps.version.outputs.version }}"
+        echo "   - ${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_USERNAME }}/prod-v1-deployement:user-service-${{ steps.version.outputs.version }}"
