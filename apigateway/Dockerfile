@@ -1,5 +1,5 @@
-# Use OpenJDK 17 as base image
-FROM openjdk:17-jdk-slim
+# Use Eclipse Temurin OpenJDK 17 as base image
+FROM eclipse-temurin:17-jdk-alpine
 
 # Set working directory
 WORKDIR /app
@@ -8,6 +8,9 @@ WORKDIR /app
 COPY mvnw .
 COPY .mvn .mvn
 COPY pom.xml .
+
+# Install necessary packages for Alpine
+RUN apk add --no-cache bash
 
 # Make mvnw executable
 RUN chmod +x mvnw
@@ -22,7 +25,10 @@ COPY src src
 RUN ./mvnw clean package -DskipTests
 
 # Create a new stage for runtime
-FROM openjdk:17-jre-slim
+FROM eclipse-temurin:17-jre-alpine
+
+# Install bash for Alpine
+RUN apk add --no-cache bash
 
 # Set working directory
 WORKDIR /app
