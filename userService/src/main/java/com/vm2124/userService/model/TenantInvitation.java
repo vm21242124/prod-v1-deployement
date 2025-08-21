@@ -9,11 +9,11 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
-@Table(name = "users")
+@Table(name = "tenant_invitations")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class TenantInvitation {
     
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -23,28 +23,22 @@ public class User {
     private String tenantId; // Reference to tenant UUID as string
     
     @Column(nullable = false)
-    private String username;
-    
-    @Column(nullable = false)
     private String email;
     
-    @Column(nullable = false)
+    @Column(name = "first_name")
     private String firstName;
     
-    @Column(nullable = false)
+    @Column(name = "last_name")
     private String lastName;
     
-    @Column(nullable = false)
-    private String password;
+    @Column(name = "invitation_token", nullable = false, unique = true)
+    private String invitationToken;
     
-    @Enumerated(EnumType.STRING)
-    private UserStatus status = UserStatus.ACTIVE;
+    @Column(name = "invited_by")
+    private String invitedById; // Reference to user UUID as string
     
-    @Column(name = "employee_id")
-    private String employeeId;
-    
-    @Column(name = "phone_number")
-    private String phoneNumber;
+    @Column(name = "role_id")
+    private String roleId; // Reference to role UUID as string
     
     @Column(name = "department")
     private String department;
@@ -52,20 +46,17 @@ public class User {
     @Column(name = "job_title")
     private String jobTitle;
     
-    @Column(name = "manager_id")
-    private String managerId; // Reference to another user UUID as string
+    @Enumerated(EnumType.STRING)
+    private InvitationStatus status = InvitationStatus.PENDING;
     
-    @Column(name = "last_login_at")
-    private LocalDateTime lastLoginAt;
+    @Column(name = "expires_at")
+    private LocalDateTime expiresAt;
     
-    @Column(name = "password_changed_at")
-    private LocalDateTime passwordChangedAt;
+    @Column(name = "accepted_at")
+    private LocalDateTime acceptedAt;
     
-    @Column(name = "failed_login_attempts")
-    private Integer failedLoginAttempts = 0;
-    
-    @Column(name = "account_locked_until")
-    private LocalDateTime accountLockedUntil;
+    @Column(name = "accepted_by")
+    private String acceptedById; // Reference to user UUID as string
     
     @Column(name = "created_at")
     private LocalDateTime createdAt;
@@ -77,6 +68,9 @@ public class User {
     protected void onCreate() {
         createdAt = LocalDateTime.now();
         updatedAt = LocalDateTime.now();
+        if (expiresAt == null) {
+            expiresAt = LocalDateTime.now().plusDays(7); // Default 7 days expiry
+        }
     }
     
     @PreUpdate
@@ -84,7 +78,7 @@ public class User {
         updatedAt = LocalDateTime.now();
     }
     
-    public enum UserStatus {
-        ACTIVE, INACTIVE, SUSPENDED
+    public enum InvitationStatus {
+        PENDING, ACCEPTED, EXPIRED, CANCELLED
     }
 }
