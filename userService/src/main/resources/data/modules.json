@@ -1,0 +1,82 @@
+[
+  {
+    "code": "USER_MANAGEMENT",
+    "name": "User Management",
+    "description": "Complete user management functionality"
+  },
+  {
+    "code": "ROLE_MANAGEMENT",
+    "name": "Role Management",
+    "description": "Role and permission management"
+  },
+  {
+    "code": "TENANT_CONFIGURATION",
+    "name": "Tenant Configuration",
+    "description": "Tenant configuration management"
+  },
+  {
+    "code": "AUDIT_LOGS",
+    "name": "Audit Logs",
+    "description": "Comprehensive audit logging"
+  },
+  {
+    "code": "REPORTING",
+    "name": "Reporting",
+    "description": "Advanced reporting capabilities"
+  },
+  {
+    "code": "ANALYTICS",
+    "name": "Analytics",
+    "description": "Data analytics and insights"
+  },
+  {
+    "code": "NOTIFICATIONS",
+    "name": "Notifications",
+    "description": "Email and push notifications"
+  },
+  {
+    "code": "INTEGRATIONS",
+    "name": "Integrations",
+    "description": "Third-party integrations"
+  },
+  {
+    "code": "SECURITY",
+    "name": "Security",
+    "description": "Advanced security features"
+  },
+  {
+    "code": "BACKUP_RESTORE",
+    "name": "Backup & Restore",
+    "description": "Data backup and restore"
+  },
+  {
+    "code": "API_MANAGEMENT",
+    "name": "API Management",
+    "description": "API management and monitoring"
+  },
+  {
+    "code": "WORKFLOW",
+    "name": "Workflow Management",
+    "description": "Workflow automation"
+  },
+  {
+    "code": "DOCUMENT_MANAGEMENT",
+    "name": "Document Management",
+    "description": "Document storage and management"
+  },
+  {
+    "code": "COMMUNICATION",
+    "name": "Communication Tools",
+    "description": "Internal communication tools"
+  },
+  {
+    "code": "CALENDAR",
+    "name": "Calendar Management",
+    "description": "Calendar and scheduling"
+  },
+  {
+    "code": "TASK_MANAGEMENT",
+    "name": "Task Management",
+    "description": "Task tracking and management"
+  }
+]

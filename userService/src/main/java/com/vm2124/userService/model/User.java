@@ -19,8 +19,11 @@ public class User {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     
+    @Column(name = "generated_id", nullable = false, unique = true, length = 10)
+    private String generatedId;
+    
     @Column(name = "tenant_id", nullable = false)
-    private String tenantId; // Reference to tenant UUID as string
+    private String tenantId; // Reference to tenant generated ID
     
     @Column(nullable = false)
     private String username;

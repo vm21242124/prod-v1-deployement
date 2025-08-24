@@ -21,14 +21,17 @@ public class UserTenantRole {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     
+    @Column(name = "generated_id", nullable = false, unique = true, length = 10)
+    private String generatedId;
+    
     @Column(name = "user_id", nullable = false)
-    private String userId; // Reference to user UUID as string
+    private String userId; // Reference to user generated ID
     
     @Column(name = "role_id", nullable = false)
-    private String roleId; // Reference to role UUID as string
+    private String roleId; // Reference to role generated ID
     
     @Column(name = "tenant_id", nullable = false)
-    private String tenantId; // Reference to tenant UUID as string
+    private String tenantId; // Reference to tenant generated ID
     
     @Column(name = "assigned_by")
     private String assignedBy;

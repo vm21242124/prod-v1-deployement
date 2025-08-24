@@ -116,12 +116,16 @@ curl http://localhost:8080/api/users
 - **Health**: http://localhost:8080/actuator/health
 - **Routes**: http://localhost:8080/actuator/gateway/routes
 - **Metrics**: http://localhost:8080/actuator/metrics
+- **Fallback Endpoints**: http://localhost:8080/fallback/{service-name}
 
 ### User Service
 - **Health**: http://localhost:8081/api/users/health
 - **Test**: http://localhost:8081/api/users/test
 - **All Users**: http://localhost:8081/api/users
 - **User by ID**: http://localhost:8081/api/users/{id}
+- **User Info**: http://localhost:8081/api/users/{userId}/info
+- **Token Validation**: http://localhost:8081/api/auth/validate
+- **Current User Info**: http://localhost:8081/api/auth/me
 
 ### Gateway Routes
 - **User Service**: http://localhost:8080/api/users/**
@@ -129,14 +133,212 @@ curl http://localhost:8080/api/users
 - **Order Service**: http://localhost:8080/api/orders/**
 - **Auth Service**: http://localhost:8080/api/auth/**
 
+### Authentication Endpoints
+
+#### Login
+```
+POST /api/auth/login
+```
+
+**Request Body:**
+```json
+{
+  "email": "admin@example.com",
+  "password": "password123"
+}
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "message": "Login successful",
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "tokenType": "Bearer",
+  "expiresAt": "2024-01-16T10:30:00",
+  "user": {
+    "id": "123e4567-e89b-12d3-a456-426614174000",
+    "generatedId": "USR1234567",
+    "username": "admin@example.com",
+    "email": "admin@example.com",
+    "firstName": "Admin",
+    "lastName": "User",
+    "isActive": true,
+    "tenantId": "TNT1234567",
+    "tenantGeneratedId": "TNT1234567",
+    "roles": ["ROL1234567"],
+    "lastLoginAt": "2024-01-15T10:30:00"
+  }
+}
+```
+
+**Error Response:**
+```json
+{
+  "success": false,
+  "message": "Invalid email or password",
+  "token": null,
+  "tokenType": null,
+  "expiresAt": null,
+  "user": null
+}
+```
+
+#### Validate Token (Enhanced)
+```
+GET /api/auth/validate
+```
+
+**Headers:**
+```
+Authorization: Bearer <token>
+```
+
+**Response:**
+```json
+{
+  "valid": true,
+  "message": "User information retrieved successfully",
+  "user": {
+    "id": "123e4567-e89b-12d3-a456-426614174000",
+    "generatedId": "USR1234567",
+    "username": "admin@example.com",
+    "email": "admin@example.com",
+    "firstName": "Admin",
+    "lastName": "User",
+    "isActive": true,
+    "tenantId": "TNT1234567",
+    "tenantGeneratedId": "TNT1234567",
+    "createdAt": "2024-01-15T10:30:00",
+    "lastLoginAt": "2024-01-15T10:30:00"
+  },
+  "tenant": {
+    "id": "456e7890-e89b-12d3-a456-426614174000",
+    "generatedId": "TNT1234567",
+    "name": "Example Corp",
+    "domain": "example.com",
+    "status": "ACTIVE",
+    "plan": "PREMIUM",
+    "createdAt": "2024-01-15T10:30:00",
+    "enabledModules": [
+      "USER_MANAGEMENT",
+      "ROLE_MANAGEMENT",
+      "SECURITY",
+      "REPORTING"
+    ],
+    "configuration": {
+      "maxUsers": 100,
+      "storageLimit": "10GB",
+      "isActive": true
+    }
+  },
+  "roles": [
+    {
+      "id": "789e0123-e89b-12d3-a456-426614174000",
+      "generatedId": "ROL1234567",
+      "roleCode": "TENANT_ADMIN",
+      "roleName": "Tenant Administrator",
+      "description": "Tenant administrator with tenant-specific permissions",
+      "priority": 800,
+      "roleType": "TENANT_ADMIN",
+      "isSystemRole": true,
+      "isDefault": false,
+      "permissions": [
+        "USER_CREATE",
+        "USER_READ",
+        "USER_UPDATE",
+        "ROLE_CREATE",
+        "ROLE_READ",
+        "ROLE_UPDATE",
+        "TENANT_CONFIG_READ",
+        "TENANT_CONFIG_UPDATE"
+      ]
+    }
+  ],
+  "permissions": [
+    "USER_CREATE",
+    "USER_READ",
+    "USER_UPDATE",
+    "USER_ACTIVATE",
+    "USER_DEACTIVATE",
+    "ROLE_CREATE",
+    "ROLE_READ",
+    "ROLE_UPDATE",
+    "ROLE_ASSIGN",
+    "ROLE_REMOVE",
+    "TENANT_CONFIG_READ",
+    "TENANT_CONFIG_UPDATE",
+    "FEATURE_READ",
+    "FEATURE_UPDATE",
+    "AUDIT_READ",
+    "REPORT_CREATE",
+    "REPORT_READ",
+    "REPORT_UPDATE",
+    "REPORT_EXPORT"
+  ],
+  "metadata": {
+    "timestamp": "2024-01-15T10:30:00.000Z",
+    "totalRoles": 1,
+    "totalPermissions": 19
+  }
+}
+```
+
+#### Get Current User Info (from Context)
+```
+GET /api/auth/me
+```
+
+**Headers (set by API Gateway):**
+```
+X-User-ID: 123e4567-e89b-12d3-a456-426614174000
+X-User-Generated-ID: USR1234567
+X-Username: admin@example.com
+X-Email: admin@example.com
+X-First-Name: Admin
+X-Last-Name: User
+X-Is-Active: true
+X-Tenant-ID: TNT1234567
+X-Tenant-Generated-ID: TNT1234567
+X-User-Roles: ["ROL1234567"]
+X-User-Permissions: ["USER_CREATE", "USER_READ", "USER_UPDATE"]
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "message": "User information retrieved from context",
+  "user": {
+    "id": "123e4567-e89b-12d3-a456-426614174000",
+    "generatedId": "USR1234567",
+    "username": "admin@example.com",
+    "email": "admin@example.com",
+    "firstName": "Admin",
+    "lastName": "User",
+    "isActive": true,
+    "tenantId": "TNT1234567",
+    "tenantGeneratedId": "TNT1234567",
+    "createdAt": "2024-01-15T10:30:00",
+    "lastLoginAt": "2024-01-15T10:30:00"
+  },
+  "permissions": [
+    "USER_CREATE",
+    "USER_READ",
+    "USER_UPDATE"
+  ]
+}
+```
+
 ## 🔧 Configuration Files
 
 ### Key Configuration Changes Made
 
 1. **User Service Application Name**: Fixed conflicting names in `application.properties`
 2. **Gateway Routes**: Updated to use service discovery (`lb://user-service`)
-3. **Circuit Breakers**: Added for all services
-4. **Logging**: Enhanced for debugging
+3. **JWT Authentication**: Implemented in API Gateway with automatic user context extraction
+4. **Circuit Breakers**: Added for all services
+5. **Logging**: Enhanced for debugging
 
 ### Configuration Files
 
@@ -225,12 +427,47 @@ curl http://localhost:8080/actuator/health
 
 - ✅ **Service Discovery** with Eureka
 - ✅ **API Gateway** with Spring Cloud Gateway
+- ✅ **JWT Authentication** with automatic user context extraction
 - ✅ **Circuit Breakers** for fault tolerance
 - ✅ **Health Checks** for all services
 - ✅ **Load Balancing** with Ribbon
 - ✅ **CORS Configuration** for web clients
 - ✅ **Rate Limiting** (Redis-based)
 - ✅ **Monitoring** with Actuator endpoints
+
+## 🔐 API Gateway Authentication Flow
+
+### How It Works
+
+1. **Client Request**: Client sends request with JWT token in Authorization header
+2. **Token Validation**: API Gateway validates JWT token and extracts user information
+3. **User Service Call**: Gateway calls User Service to get comprehensive user data
+4. **Header Injection**: Gateway adds user information as headers to the request
+5. **Service Routing**: Request is forwarded to appropriate microservice with user context
+
+### Headers Added by Gateway
+
+```
+X-User-ID: 123e4567-e89b-12d3-a456-426614174000
+X-User-Generated-ID: USR1234567
+X-Username: admin@example.com
+X-Email: admin@example.com
+X-First-Name: Admin
+X-Last-Name: User
+X-Is-Active: true
+X-Tenant-ID: TNT1234567
+X-Tenant-Generated-ID: TNT1234567
+X-User-Roles: ["ROL1234567"]
+X-User-Permissions: ["USER_CREATE", "USER_READ", "USER_UPDATE"]
+```
+
+### Public Endpoints (No Authentication Required)
+
+- `/api/auth/login` - User login
+- `/api/auth/register` - User registration
+- `/actuator/**` - Health checks and metrics
+- `/health` - Health endpoint
+- `/test/**` - Test endpoints
 
 ## 🚀 Next Steps
 

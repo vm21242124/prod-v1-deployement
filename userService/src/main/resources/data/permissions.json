@@ -1,0 +1,212 @@
+[
+  {
+    "code": "USER_CREATE",
+    "name": "Create users",
+    "description": "Permission to create new users",
+    "category": "USER"
+  },
+  {
+    "code": "USER_READ",
+    "name": "Read user information",
+    "description": "Permission to read user information",
+    "category": "USER"
+  },
+  {
+    "code": "USER_UPDATE",
+    "name": "Update user information",
+    "description": "Permission to update user information",
+    "category": "USER"
+  },
+  {
+    "code": "USER_DELETE",
+    "name": "Delete users",
+    "description": "Permission to delete users",
+    "category": "USER"
+  },
+  {
+    "code": "USER_ACTIVATE",
+    "name": "Activate users",
+    "description": "Permission to activate users",
+    "category": "USER"
+  },
+  {
+    "code": "USER_DEACTIVATE",
+    "name": "Deactivate users",
+    "description": "Permission to deactivate users",
+    "category": "USER"
+  },
+  {
+    "code": "USER_RESET_PASSWORD",
+    "name": "Reset user passwords",
+    "description": "Permission to reset user passwords",
+    "category": "USER"
+  },
+  {
+    "code": "ROLE_CREATE",
+    "name": "Create roles",
+    "description": "Permission to create new roles",
+    "category": "ROLE"
+  },
+  {
+    "code": "ROLE_READ",
+    "name": "Read role information",
+    "description": "Permission to read role information",
+    "category": "ROLE"
+  },
+  {
+    "code": "ROLE_UPDATE",
+    "name": "Update role information",
+    "description": "Permission to update role information",
+    "category": "ROLE"
+  },
+  {
+    "code": "ROLE_DELETE",
+    "name": "Delete roles",
+    "description": "Permission to delete roles",
+    "category": "ROLE"
+  },
+  {
+    "code": "ROLE_ASSIGN",
+    "name": "Assign roles to users",
+    "description": "Permission to assign roles to users",
+    "category": "ROLE"
+  },
+  {
+    "code": "ROLE_REMOVE",
+    "name": "Remove roles from users",
+    "description": "Permission to remove roles from users",
+    "category": "ROLE"
+  },
+  {
+    "code": "TENANT_CONFIG_READ",
+    "name": "Read tenant configuration",
+    "description": "Permission to read tenant configuration",
+    "category": "TENANT"
+  },
+  {
+    "code": "TENANT_CONFIG_UPDATE",
+    "name": "Update tenant configuration",
+    "description": "Permission to update tenant configuration",
+    "category": "TENANT"
+  },
+  {
+    "code": "TENANT_CREATE",
+    "name": "Create tenants",
+    "description": "Permission to create new tenants",
+    "category": "TENANT"
+  },
+  {
+    "code": "TENANT_READ",
+    "name": "Read tenant information",
+    "description": "Permission to read tenant information",
+    "category": "TENANT"
+  },
+  {
+    "code": "TENANT_UPDATE",
+    "name": "Update tenant information",
+    "description": "Permission to update tenant information",
+    "category": "TENANT"
+  },
+  {
+    "code": "TENANT_DELETE",
+    "name": "Delete tenants",
+    "description": "Permission to delete tenants",
+    "category": "TENANT"
+  },
+  {
+    "code": "FEATURE_ENABLE",
+    "name": "Enable features",
+    "description": "Permission to enable features",
+    "category": "FEATURE"
+  },
+  {
+    "code": "FEATURE_DISABLE",
+    "name": "Disable features",
+    "description": "Permission to disable features",
+    "category": "FEATURE"
+  },
+  {
+    "code": "FEATURE_READ",
+    "name": "Read feature information",
+    "description": "Permission to read feature information",
+    "category": "FEATURE"
+  },
+  {
+    "code": "FEATURE_UPDATE",
+    "name": "Update feature configuration",
+    "description": "Permission to update feature configuration",
+    "category": "FEATURE"
+  },
+  {
+    "code": "AUDIT_READ",
+    "name": "Read audit logs",
+    "description": "Permission to read audit logs",
+    "category": "AUDIT"
+  },
+  {
+    "code": "AUDIT_EXPORT",
+    "name": "Export audit logs",
+    "description": "Permission to export audit logs",
+    "category": "AUDIT"
+  },
+  {
+    "code": "AUDIT_DELETE",
+    "name": "Delete audit logs",
+    "description": "Permission to delete audit logs",
+    "category": "AUDIT"
+  },
+  {
+    "code": "REPORT_CREATE",
+    "name": "Create reports",
+    "description": "Permission to create reports",
+    "category": "REPORT"
+  },
+  {
+    "code": "REPORT_READ",
+    "name": "Read reports",
+    "description": "Permission to read reports",
+    "category": "REPORT"
+  },
+  {
+    "code": "REPORT_UPDATE",
+    "name": "Update reports",
+    "description": "Permission to update reports",
+    "category": "REPORT"
+  },
+  {
+    "code": "REPORT_DELETE",
+    "name": "Delete reports",
+    "description": "Permission to delete reports",
+    "category": "REPORT"
+  },
+  {
+    "code": "REPORT_EXPORT",
+    "name": "Export reports",
+    "description": "Permission to export reports",
+    "category": "REPORT"
+  },
+  {
+    "code": "SYSTEM_CONFIG_READ",
+    "name": "Read system configuration",
+    "description": "Permission to read system configuration",
+    "category": "SYSTEM"
+  },
+  {
+    "code": "SYSTEM_CONFIG_UPDATE",
+    "name": "Update system configuration",
+    "description": "Permission to update system configuration",
+    "category": "SYSTEM"
+  },
+  {
+    "code": "SYSTEM_BACKUP",
+    "name": "Create system backups",
+    "description": "Permission to create system backups",
+    "category": "SYSTEM"
+  },
+  {
+    "code": "SYSTEM_RESTORE",
+    "name": "Restore system from backup",
+    "description": "Permission to restore system from backup",
+    "category": "SYSTEM"
+  }
+]

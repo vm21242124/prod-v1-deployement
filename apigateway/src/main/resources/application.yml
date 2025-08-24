@@ -24,6 +24,7 @@ spring:
               predicates:
                 - Path=/api/users/**
               filters:
+                - StripPrefix=1
                 - name: CircuitBreaker
                   args:
                     name: user-service-circuit-breaker
@@ -66,12 +67,12 @@ spring:
               uri: lb://user-service
               predicates:
                 - Path=/api/auth/**
-              # Temporarily disabled circuit breaker for debugging
-              # filters:
-              #   - name: CircuitBreaker
-              #     args:
-              #       name: auth-service-circuit-breaker
-              #       fallbackUri: forward:/fallback/auth-service
+              filters:
+                - StripPrefix=1
+                - name: CircuitBreaker
+                  args:
+                    name: auth-service-circuit-breaker
+                    fallbackUri: forward:/fallback/auth-service
 
   devtools:
     restart:

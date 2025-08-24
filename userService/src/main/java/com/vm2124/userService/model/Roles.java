@@ -21,8 +21,11 @@ public class Roles {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     
+    @Column(name = "generated_id", nullable = false, unique = true, length = 10)
+    private String generatedId;
+    
     @Column(name = "tenant_id")
-    private String tenantId; // Reference to tenant UUID as string (null for system-wide roles)
+    private String tenantId; // Reference to tenant generated ID (null for system-wide roles)
     
     @Column(nullable = false)
     private String roleCode;

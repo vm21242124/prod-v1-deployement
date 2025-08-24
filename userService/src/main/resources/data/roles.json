@@ -1,0 +1,84 @@
+[
+  {
+    "code": "SUPER_ADMIN",
+    "name": "Super Administrator",
+    "description": "System-wide super administrator with all permissions",
+    "priority": 1000,
+    "isSystemRole": true,
+    "isDefault": false,
+    "roleType": "SYSTEM",
+    "permissions": [
+      "USER_CREATE", "USER_READ", "USER_UPDATE", "USER_DELETE", "USER_ACTIVATE", "USER_DEACTIVATE", "USER_RESET_PASSWORD",
+      "ROLE_CREATE", "ROLE_READ", "ROLE_UPDATE", "ROLE_DELETE", "ROLE_ASSIGN", "ROLE_REMOVE",
+      "TENANT_CREATE", "TENANT_READ", "TENANT_UPDATE", "TENANT_DELETE", "TENANT_CONFIG_READ", "TENANT_CONFIG_UPDATE",
+      "FEATURE_ENABLE", "FEATURE_DISABLE", "FEATURE_READ", "FEATURE_UPDATE",
+      "AUDIT_READ", "AUDIT_EXPORT", "AUDIT_DELETE",
+      "REPORT_CREATE", "REPORT_READ", "REPORT_UPDATE", "REPORT_DELETE", "REPORT_EXPORT",
+      "SYSTEM_CONFIG_READ", "SYSTEM_CONFIG_UPDATE", "SYSTEM_BACKUP", "SYSTEM_RESTORE"
+    ]
+  },
+  {
+    "code": "SYSTEM_ADMIN",
+    "name": "System Administrator",
+    "description": "System administrator with most permissions",
+    "priority": 900,
+    "isSystemRole": true,
+    "isDefault": false,
+    "roleType": "SYSTEM",
+    "permissions": [
+      "USER_CREATE", "USER_READ", "USER_UPDATE", "USER_ACTIVATE", "USER_DEACTIVATE",
+      "ROLE_CREATE", "ROLE_READ", "ROLE_UPDATE", "ROLE_ASSIGN", "ROLE_REMOVE",
+      "TENANT_READ", "TENANT_CONFIG_READ", "TENANT_CONFIG_UPDATE",
+      "FEATURE_ENABLE", "FEATURE_DISABLE", "FEATURE_READ", "FEATURE_UPDATE",
+      "AUDIT_READ", "AUDIT_EXPORT",
+      "REPORT_CREATE", "REPORT_READ", "REPORT_UPDATE", "REPORT_EXPORT",
+      "SYSTEM_CONFIG_READ"
+    ]
+  },
+  {
+    "code": "TENANT_ADMIN",
+    "name": "Tenant Administrator",
+    "description": "Tenant administrator with tenant-specific permissions",
+    "priority": 800,
+    "isSystemRole": true,
+    "isDefault": false,
+    "roleType": "TENANT_ADMIN",
+    "permissions": [
+      "USER_CREATE", "USER_READ", "USER_UPDATE", "USER_ACTIVATE", "USER_DEACTIVATE",
+      "ROLE_CREATE", "ROLE_READ", "ROLE_UPDATE", "ROLE_ASSIGN", "ROLE_REMOVE",
+      "TENANT_CONFIG_READ", "TENANT_CONFIG_UPDATE",
+      "FEATURE_READ", "FEATURE_UPDATE",
+      "AUDIT_READ",
+      "REPORT_CREATE", "REPORT_READ", "REPORT_UPDATE", "REPORT_EXPORT"
+    ]
+  },
+  {
+    "code": "TENANT_USER",
+    "name": "Tenant User",
+    "description": "Regular tenant user with basic permissions",
+    "priority": 100,
+    "isSystemRole": true,
+    "isDefault": true,
+    "roleType": "TENANT_USER",
+    "permissions": [
+      "USER_READ",
+      "ROLE_READ",
+      "TENANT_CONFIG_READ",
+      "FEATURE_READ",
+      "REPORT_READ"
+    ]
+  },
+  {
+    "code": "GUEST",
+    "name": "Guest",
+    "description": "Guest user with minimal permissions",
+    "priority": 10,
+    "isSystemRole": true,
+    "isDefault": false,
+    "roleType": "GUEST",
+    "permissions": [
+      "USER_READ",
+      "FEATURE_READ"
+    ]
+  }
+]

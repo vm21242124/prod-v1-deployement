@@ -1,4 +1,4 @@
-package com.vm2124.apigateway.service;
+package com.vm2124.userService.service;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import javax.crypto.SecretKey;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class JwtService {
@@ -25,18 +24,12 @@ public class JwtService {
         return Keys.hmacShaKeyFor(secret.getBytes());
     }
 
-    public String extractUsername(String token) {
-        return extractAllClaims(token).getSubject();
-    }
-
     public String extractUserId(String token) {
         return extractAllClaims(token).getSubject();
     }
 
     public String extractTenantId(String token) {
-        Claims claims = extractAllClaims(token);
-        String tenantId = claims.get("tenantId", String.class);
-        return tenantId != null ? tenantId : "default-tenant";
+        return extractAllClaims(token).get("tenantId", String.class);
     }
 
     public List<String> extractRoles(String token) {
@@ -70,11 +63,11 @@ public class JwtService {
         return extractExpiration(token).before(new Date());
     }
 
-    public String generateToken(String username, List<String> roles) {
-        return createToken(Map.of("roles", roles), username);
+    public String generateToken(String userId, String tenantId, List<String> roles) {
+        return createToken(java.util.Map.of("roles", roles, "tenantId", tenantId), userId);
     }
 
-    private String createToken(Map<String, Object> claims, String subject) {
+    private String createToken(java.util.Map<String, Object> claims, String subject) {
         return Jwts.builder()
                 .setClaims(claims)
                 .setSubject(subject)

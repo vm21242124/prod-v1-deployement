@@ -1,0 +1,114 @@
+[
+  {
+    "code": "USER_MANAGEMENT",
+    "name": "User Management",
+    "description": "Complete user management functionality",
+    "type": "BOOLEAN",
+    "isSystemFeature": true
+  },
+  {
+    "code": "ROLE_MANAGEMENT",
+    "name": "Role Management",
+    "description": "Role and permission management",
+    "type": "BOOLEAN",
+    "isSystemFeature": true
+  },
+  {
+    "code": "TENANT_CONFIGURATION",
+    "name": "Tenant Configuration",
+    "description": "Tenant configuration management",
+    "type": "BOOLEAN",
+    "isSystemFeature": true
+  },
+  {
+    "code": "AUDIT_LOGS",
+    "name": "Audit Logs",
+    "description": "Comprehensive audit logging",
+    "type": "BOOLEAN",
+    "isSystemFeature": true
+  },
+  {
+    "code": "REPORTING",
+    "name": "Reporting",
+    "description": "Advanced reporting capabilities",
+    "type": "BOOLEAN",
+    "isSystemFeature": true
+  },
+  {
+    "code": "ANALYTICS",
+    "name": "Analytics",
+    "description": "Data analytics and insights",
+    "type": "BOOLEAN",
+    "isSystemFeature": true
+  },
+  {
+    "code": "NOTIFICATIONS",
+    "name": "Notifications",
+    "description": "Email and push notifications",
+    "type": "BOOLEAN",
+    "isSystemFeature": true
+  },
+  {
+    "code": "INTEGRATIONS",
+    "name": "Integrations",
+    "description": "Third-party integrations",
+    "type": "BOOLEAN",
+    "isSystemFeature": true
+  },
+  {
+    "code": "SECURITY",
+    "name": "Security",
+    "description": "Advanced security features",
+    "type": "BOOLEAN",
+    "isSystemFeature": true
+  },
+  {
+    "code": "BACKUP_RESTORE",
+    "name": "Backup & Restore",
+    "description": "Data backup and restore",
+    "type": "BOOLEAN",
+    "isSystemFeature": true
+  },
+  {
+    "code": "API_MANAGEMENT",
+    "name": "API Management",
+    "description": "API management and monitoring",
+    "type": "BOOLEAN",
+    "isSystemFeature": true
+  },
+  {
+    "code": "WORKFLOW",
+    "name": "Workflow",
+    "description": "Workflow automation",
+    "type": "BOOLEAN",
+    "isSystemFeature": true
+  },
+  {
+    "code": "DOCUMENT_MANAGEMENT",
+    "name": "Document Management",
+    "description": "Document storage and management",
+    "type": "BOOLEAN",
+    "isSystemFeature": true
+  },
+  {
+    "code": "COMMUNICATION",
+    "name": "Communication",
+    "description": "Internal communication tools",
+    "type": "BOOLEAN",
+    "isSystemFeature": true
+  },
+  {
+    "code": "CALENDAR",
+    "name": "Calendar",
+    "description": "Calendar and scheduling",
+    "type": "BOOLEAN",
+    "isSystemFeature": true
+  },
+  {
+    "code": "TASK_MANAGEMENT",
+    "name": "Task Management",
+    "description": "Task tracking and management",
+    "type": "BOOLEAN",
+    "isSystemFeature": true
+  }
+]

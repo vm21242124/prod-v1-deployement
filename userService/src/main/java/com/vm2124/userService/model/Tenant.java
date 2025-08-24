@@ -19,6 +19,9 @@ public class Tenant {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     
+    @Column(name = "generated_id", nullable = false, unique = true, length = 10)
+    private String generatedId;
+    
     @Column(nullable = false, unique = true)
     private String tenantCode;
     
