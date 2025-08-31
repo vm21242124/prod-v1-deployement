@@ -74,6 +74,7 @@ public class Permissions {
         public static final String ROLE_READ = "ROLE_READ";
         public static final String ROLE_UPDATE = "ROLE_UPDATE";
         public static final String ROLE_DELETE = "ROLE_DELETE";
+        
         public static final String ROLE_ASSIGN = "ROLE_ASSIGN";
         
         // Tenant Management
